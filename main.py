@@ -4,9 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 from random import choice
 from time import sleep
 
-from sys import path
-path += ['/home/pi/Code/PaperTTY']
-from pipe_driver import AutoPipeDisplay
+from papertty.controller import AutoWorkerDisplay
 from IT8951 import constants
 
 def read_file(filename):
@@ -44,12 +42,12 @@ def generate_nametag_image():
     return img
 
 def main():
-    display = AutoPipeDisplay()
+    display = AutoWorkerDisplay()
 
     while True:
         img = generate_nametag_image()
         display.frame_buf.paste(img)
-        display.write_partial(constants.DisplayModes.GL16)
+        display.draw_partial(constants.DisplayModes.GL16)
 
         sleep(10)
 
